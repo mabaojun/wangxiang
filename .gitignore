@@ -1,0 +1,11 @@
+venv/
+__pycache__/
+*.pyc
+*.log
+*.txt
+install_deps.py
+install_log.txt
+libs/
+.DS_Store
+*.pyd
+*.pyi
