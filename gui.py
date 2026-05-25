@@ -151,12 +151,12 @@ class AttitudeIndicator(tk.Canvas):
             fill=COLORS["warning"], outline=""
         )
 
-        self.create_text(cx, cy - r - 15, text=f"PITCH {self._pitch:+.1f}\u00b0",
-                         fill=COLORS["pitch_color"], font=("Consolas", 10))
-        self.create_text(cx, cy + r + 15, text=f"ROLL {self._roll:+.1f}\u00b0",
-                         fill=COLORS["roll_color"], font=("Consolas", 10))
-        self.create_text(cx + r + 5, cy - r + 5, text=f"YAW {self._yaw:+.1f}\u00b0",
-                         fill=COLORS["text_tertiary"], font=("Consolas", 9), anchor="ne")
+        self.create_text(cx, cy - r - 15, text=f"俯仰 {self._pitch:+.1f}°",
+                         fill=COLORS["pitch_color"], font=("Microsoft YaHei", 10))
+        self.create_text(cx, cy + r + 15, text=f"横滚 {self._roll:+.1f}°",
+                         fill=COLORS["roll_color"], font=("Microsoft YaHei", 10))
+        self.create_text(cx + r + 5, cy - r + 5, text=f"航向 {self._yaw:+.1f}°",
+                         fill=COLORS["text_tertiary"], font=("Microsoft YaHei", 9), anchor="ne")
 
 
 class TankVisualWidget(tk.Canvas):
@@ -265,22 +265,22 @@ class CageTopView(tk.Canvas):
         self.create_rectangle(cx - 60, cy - 60, cx + 60, cy + 60,
                               fill="", outline=COLORS["border"], width=1, dash=(4, 4))
 
-        self._draw_tank(cx, cy, 40, 40, "\u4e2d\u5fc3", self._states[TankId.CENTER], is_center=True)
-        self._draw_tank(cx, cy - 45 - gap, rect_w, rect_h, "\u5317", self._states[TankId.NORTH])
-        self._draw_tank(cx, cy + 45 + gap, rect_w, rect_h, "\u5357", self._states[TankId.SOUTH])
-        self._draw_tank(cx + 45 + gap, cy, rect_h, rect_w, "\u4e1c", self._states[TankId.EAST])
-        self._draw_tank(cx - 45 - gap, cy, rect_h, rect_w, "\u897f", self._states[TankId.WEST])
+        self._draw_tank(cx, cy, 40, 40, "中心", self._states[TankId.CENTER], is_center=True)
+        self._draw_tank(cx, cy - 45 - gap, rect_w, rect_h, "北", self._states[TankId.NORTH])
+        self._draw_tank(cx, cy + 45 + gap, rect_w, rect_h, "南", self._states[TankId.SOUTH])
+        self._draw_tank(cx + 45 + gap, cy, rect_h, rect_w, "东", self._states[TankId.EAST])
+        self._draw_tank(cx - 45 - gap, cy, rect_h, rect_w, "西", self._states[TankId.WEST])
 
-        self.create_text(cx, 10, text="\u9876\u89c6\u56fe", fill=COLORS["text_secondary"],
+        self.create_text(cx, 10, text="顶视图", fill=COLORS["text_secondary"],
                          font=("Microsoft YaHei", 9))
-        self.create_text(cx + 55, cy - 55, text="N", fill=COLORS["accent"],
-                         font=("Consolas", 10))
-        self.create_text(cx + 55, cy + 55, text="S", fill=COLORS["text_secondary"],
-                         font=("Consolas", 10))
-        self.create_text(cx + 65, cy, text="E", fill=COLORS["text_secondary"],
-                         font=("Consolas", 10))
-        self.create_text(cx - 65, cy, text="W", fill=COLORS["text_secondary"],
-                         font=("Consolas", 10))
+        self.create_text(cx + 55, cy - 55, text="北", fill=COLORS["accent"],
+                         font=("Microsoft YaHei", 10))
+        self.create_text(cx + 55, cy + 55, text="南", fill=COLORS["text_secondary"],
+                         font=("Microsoft YaHei", 10))
+        self.create_text(cx + 65, cy, text="东", fill=COLORS["text_secondary"],
+                         font=("Microsoft YaHei", 10))
+        self.create_text(cx - 65, cy, text="西", fill=COLORS["text_secondary"],
+                         font=("Microsoft YaHei", 10))
 
 
 class ControlButton(tk.Frame):
@@ -404,7 +404,7 @@ class MainWindow(tk.Tk):
         self._auto_stable = False
         self._key_states = {}
 
-        self.title("\u5347\u964d\u7f51\u7bb1\u6a21\u578b\u63a7\u5236\u7cfb\u7edf v1.0")
+        self.title("可升降桁架式网箱压载控制系统 v1.0")
         self.geometry("1280x720")
         self.minsize(1024, 600)
         self.configure(bg=COLORS["bg"])
@@ -543,9 +543,9 @@ class MainWindow(tk.Tk):
 
         pitch_frame = tk.Frame(gauge_row, bg=COLORS["card"])
         pitch_frame.pack(side=tk.LEFT, expand=True, fill=tk.X)
-        tk.Label(pitch_frame, text="PITCH", bg=COLORS["card"], fg=COLORS["pitch_color"],
-                 font=("Consolas", 16)).pack()
-        self._pitch_value = tk.Label(pitch_frame, text="+0.00\u00b0", bg=COLORS["card"],
+        tk.Label(pitch_frame, text="俯仰", bg=COLORS["card"], fg=COLORS["pitch_color"],
+                 font=("Microsoft YaHei", 16)).pack()
+        self._pitch_value = tk.Label(pitch_frame, text="+0.00°", bg=COLORS["card"],
                                       fg=COLORS["pitch_color"],
                                       font=("Consolas", 24, "bold"))
         self._pitch_value.pack()
@@ -555,9 +555,9 @@ class MainWindow(tk.Tk):
 
         roll_frame = tk.Frame(gauge_row, bg=COLORS["card"])
         roll_frame.pack(side=tk.LEFT, expand=True, fill=tk.X)
-        tk.Label(roll_frame, text="ROLL", bg=COLORS["card"], fg=COLORS["roll_color"],
-                 font=("Consolas", 16)).pack()
-        self._roll_value = tk.Label(roll_frame, text="+0.00\u00b0", bg=COLORS["card"],
+        tk.Label(roll_frame, text="横滚", bg=COLORS["card"], fg=COLORS["roll_color"],
+                 font=("Microsoft YaHei", 16)).pack()
+        self._roll_value = tk.Label(roll_frame, text="+0.00°", bg=COLORS["card"],
                                      fg=COLORS["roll_color"],
                                      font=("Consolas", 24, "bold"))
         self._roll_value.pack()
@@ -567,9 +567,9 @@ class MainWindow(tk.Tk):
 
         yaw_frame = tk.Frame(gauge_row, bg=COLORS["card"])
         yaw_frame.pack(side=tk.LEFT, expand=True, fill=tk.X)
-        tk.Label(yaw_frame, text="YAW", bg=COLORS["card"], fg=COLORS["yaw_color"],
-                 font=("Consolas", 16)).pack()
-        self._yaw_value = tk.Label(yaw_frame, text="+0.00\u00b0", bg=COLORS["card"],
+        tk.Label(yaw_frame, text="航向", bg=COLORS["card"], fg=COLORS["yaw_color"],
+                 font=("Microsoft YaHei", 16)).pack()
+        self._yaw_value = tk.Label(yaw_frame, text="+0.00°", bg=COLORS["card"],
                                     fg=COLORS["yaw_color"],
                                     font=("Consolas", 24, "bold"))
         self._yaw_value.pack()
@@ -660,11 +660,11 @@ class MainWindow(tk.Tk):
         notebook.pack(fill=tk.X, padx=8, pady=4)
 
         pid_frame = tk.Frame(notebook, bg=COLORS["card"])
-        notebook.add(pid_frame, text="  PID  ")
+        notebook.add(pid_frame, text="  PID参数  ")
         self._build_pid_tab(pid_frame)
 
         addr_frame = tk.Frame(notebook, bg=COLORS["card"])
-        notebook.add(addr_frame, text="  \u5730\u5740  ")
+        notebook.add(addr_frame, text="  设备地址  ")
         self._build_addr_tab(addr_frame)
 
     def _build_pid_tab(self, parent):
@@ -700,7 +700,7 @@ class MainWindow(tk.Tk):
 
         target_frame = tk.Frame(parent, bg=COLORS["card"])
         target_frame.pack(fill=tk.X, padx=8, pady=6)
-        tk.Label(target_frame, text="\u76ee\u6807Pitch:", bg=COLORS["card"], fg=COLORS["text"],
+        tk.Label(target_frame, text="目标俯仰角:", bg=COLORS["card"], fg=COLORS["text"],
                  font=("Microsoft YaHei", 10)).pack(side=tk.LEFT)
         self._target_pitch_var = tk.StringVar(value="0.0")
         tk.Entry(target_frame, textvariable=self._target_pitch_var, width=6,
@@ -708,7 +708,7 @@ class MainWindow(tk.Tk):
                  bg="#FFFFFF", fg=COLORS["text"], relief=tk.FLAT,
                  highlightbackground=COLORS["border"], highlightthickness=1,
                  insertbackground=COLORS["accent"]).pack(side=tk.LEFT, padx=4)
-        tk.Label(target_frame, text="\u76ee\u6807Roll:", bg=COLORS["card"], fg=COLORS["text"],
+        tk.Label(target_frame, text="目标横滚角:", bg=COLORS["card"], fg=COLORS["text"],
                  font=("Microsoft YaHei", 10)).pack(side=tk.LEFT, padx=(12, 0))
         self._target_roll_var = tk.StringVar(value="0.0")
         tk.Entry(target_frame, textvariable=self._target_roll_var, width=6,
@@ -740,8 +740,8 @@ class MainWindow(tk.Tk):
 
         imu_frame = tk.Frame(parent, bg=COLORS["card"])
         imu_frame.pack(fill=tk.X, padx=8, pady=3)
-        tk.Label(imu_frame, text="IMU:", bg=COLORS["card"], fg=COLORS["text"],
-                 font=("Microsoft YaHei", 10), width=5, anchor="e").pack(side=tk.LEFT)
+        tk.Label(imu_frame, text="IMU \u8bbe\u5907:", bg=COLORS["card"], fg=COLORS["text"],
+                 font=("Microsoft YaHei", 10), width=8, anchor="e").pack(side=tk.LEFT)
         self._imu_addr_var = tk.StringVar(value=str(self._config.imu.address))
         tk.Entry(imu_frame, textvariable=self._imu_addr_var, width=4,
                  font=("Consolas", 11), justify=tk.CENTER,
